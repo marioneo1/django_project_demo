@@ -1,0 +1,5 @@
+{% for product in products %}
+    <li>Product: {{product.name}}</li>
+    <li>Price: {{product.price}}</li>
+    <li>Date Posted: {{product.start_date|date:'m/d/Y'}}</li>
+{% endfor %}
