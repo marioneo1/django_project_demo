@@ -1,9 +1,8 @@
-FROM continuumio/miniconda3
+FROM python:3.8-slim-buster
 WORKDIR /app
 
-COPY freeze.yml .
-
-RUN conda config --set restore_free_channel true && conda env create -n py39 -f freeze.yml && echo "conda activate py39" > ~/.bashrc
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 
 COPY . .
 

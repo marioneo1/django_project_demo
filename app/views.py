@@ -23,10 +23,18 @@ def search(request):
     keyword = params.get('keyword','')
     min_price = params.get('min_price',MIN_PRICE)
     max_price = params.get('max_price',MAX_PRICE)
-
     if not isinstance(keyword, str): keyword = ""
-    if not isinstance(min_price,int):min_price = MIN_PRICE
-    if not isinstance(max_price,int):max_price = MAX_PRICE
+
+    try:
+        min_price = int(min_price)
+    except ValueError:
+        min_price = MIN_PRICE
+       
+    try:
+        max_price = int(max_price)
+    except ValueError:
+        max_price = MAX_PRICE
+
 
     products = Product.objects.filter(name__contains=keyword,price__lte=max_price,price__gte=min_price)
     product_dict = serializers.serialize('python',products)
@@ -36,6 +44,7 @@ def search(request):
 @csrf_exempt
 def add_products(request):
     # print(request.POST.get('name'))
+    print(request.POST)
     form = ProductForm()
     if request.method == "POST":
         form = ProductForm(request.POST)
