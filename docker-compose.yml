@@ -12,8 +12,8 @@ services:
         web:
           image: marioneo1/anglehealth-ecommerce-demo:latest-1123
           build: .
-          command: sh -c "python manage.py loaddata datadump.json &&
-                          python manage.py migrate &&
+          command: sh -c "python manage.py migrate &&
+                          python manage.py loaddata datadump.json &&
                           python manage.py runserver 0.0.0.0:8000"
 
           #command: sh -c "python manage.py runserver 0.0.0.0:8000"
